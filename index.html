@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>SKYREX | FiveM Developer & Administrator — Portfolio</title>
+<!-- Google Fonts + Font Awesome -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Open Graph / Social Embed -->
+<meta property="og:title" content="SKYREX · FiveM Developer & Administrator" />
+<meta property="og:description" content="Professional FiveM & full-stack developer. Administrator at Matrix Customs — custom Lua, React dashboards, Discord integration." />
+<meta property="og:image" content="https://store.brookgaming.com/cdn/shop/files/sebastian_dtc_A_homepage_hero_section_sleek_gradient_backgrou_00e8f32e-e8f7-4578-886e-b86f5a95c90f_3.png?v=1732641924&width=1456" />
+<meta property="og:url" content="https://hanamihaven.online/" />
+<meta name="theme-color" content="#ff008c" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #05000e;
+    color: white;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(5, 0, 14, 0.96), rgba(15, 0, 30, 0.9)), url("https://store.brookgaming.com/cdn/shop/files/sebastian_dtc_A_homepage_hero_section_sleek_gradient_backgrou_00e8f32e-e8f7-4578-886e-b86f5a95c90f_3.png?v=1732641924&width=1456") center center/cover;
+    z-index: -3;
+    background-attachment: fixed;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(255, 0, 140, 0.25), transparent 35%),
+                radial-gradient(circle at 80% 60%, rgba(139, 92, 246, 0.3), transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(0, 229, 255, 0.15), transparent 30%);
+    z-index: -2;
+  }
+
+  .cursor-glow {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s linear;
+    will-change: left, top;
+  }
+
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1280px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 28px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 60px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #fff, var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .logo span {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 38px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #f0f0ff;
+    font-weight: 500;
+    transition: 0.25s;
+    font-size: 0.98rem;
+  }
+  .nav-links a:hover, .nav-links a.nav-active {
+    color: var(--pink);
+    text-shadow: 0 0 6px rgba(255, 0, 140, 0.6);
+  }
+
+  .discord-btn {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    border-radius: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(255, 0, 140, 0.5);
+    transition: 0.2s;
+  }
+  .discord-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(255, 0, 140, 0.8);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 8% 80px;
+  }
+  .hero-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .avatar-ring {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(135deg, var(--pink), var(--cyan), var(--purple));
+    box-shadow: 0 0 35px rgba(255, 0, 140, 0.6), 0 0 70px rgba(139, 92, 246, 0.3);
+    animation: pulseGlow 3s infinite ease-in-out;
+  }
+  .avatar-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #0b0118;
+  }
+  @keyframes pulseGlow {
+    0% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 0, 140, 0.5); }
+    50% { transform: scale(1.02); box-shadow: 0 0 55px rgba(255, 0, 140, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 0, 140, 0.5); }
+  }
+
+  .hero-content h3 {
+    font-size: 1rem;
+    letter-spacing: 5px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+  .hero-content h1 {
+    font-family: 'Orbitron';
+    font-size: 4.8rem;
+    line-height: 1.1;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #fff, var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+  }
+  .hero-content h2 {
+    font-size: 1.6rem;
+    letter-spacing: 5px;
+    font-weight: 400;
+    color: #cbcbf2;
+    margin-bottom: 25px;
+  }
+  .hero-content p {
+    max-width: 600px;
+    line-height: 1.75;
+    color: #e0e0f0;
+    margin-bottom: 35px;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 14px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    box-shadow: 0 4px 14px rgba(255, 0, 140, 0.5);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 0, 140, 0.6);}
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    backdrop-filter: blur(5px);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px);}
+
+  section {
+    padding: 100px 8%;
+  }
+  .section-title {
+    font-family: 'Orbitron';
+    font-size: 3rem;
+    margin-bottom: 15px;
+    background: linear-gradient(120deg, #fff, var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 1px;
+  }
+  .section-sub {
+    color: #b2b2da;
+    margin-bottom: 60px;
+    font-size: 1.1rem;
+    border-left: 3px solid var(--pink);
+    padding-left: 18px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 30px;
+  }
+  .about-card {
+    position: relative;
+    padding: 40px;
+    border-radius: 32px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .about-card h3 {
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+  .about-card p {
+    line-height: 1.8;
+    color: #dedef0;
+    margin-bottom: 20px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .stat-card {
+    padding: 28px 15px;
+    text-align: center;
+    background: rgba(255,255,255,0.04);
+    border-radius: 28px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: 0.2s;
+  }
+  .stat-card h4 {
+    font-size: 2.5rem;
+    color: var(--pink);
+    font-family: 'Orbitron';
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 28px;
+  }
+  .skill-card {
+    padding: 38px 28px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(14px);
+    transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+  }
+  .skill-card i {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    background: linear-gradient(145deg, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .skill-card:hover, .project-card:hover, .contact-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--pink);
+    box-shadow: 0 20px 40px rgba(255, 0, 140, 0.2);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 30px;
+  }
+  .project-card {
+    padding: 32px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 32px;
+    backdrop-filter: blur(14px);
+    transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+  }
+  .project-tag {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+  }
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .project-stack span {
+    background: rgba(255,255,255,0.1);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+  }
+  .project-btn {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    padding: 10px 22px;
+    border-radius: 40px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 28px;
+  }
+  .contact-card {
+    padding: 38px 20px;
+    text-align: center;
+    text-decoration: none;
+    background: rgba(255,255,255,0.04);
+    border-radius: 32px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+  }
+  .contact-card i {
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+  }
+  .contact-card h3 {
+    color: white;
+  }
+  footer {
+    padding: 60px 8% 45px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(15px);
+  }
+  .footer-logo {
+    font-family: 'Orbitron';
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .footer-logo span { color: var(--pink); }
+  .footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 25px;
+  }
+  .footer-socials a {
+    background: rgba(255,255,255,0.07);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.3rem;
+    transition: 0.2s;
+  }
+  .footer-socials a:hover {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    transform: translateY(-5px);
+  }
+  #scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--purple2), var(--cyan));
+    z-index: 10001;
+    box-shadow: 0 0 10px #ff008c;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.75s ease;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff66b5, #b84eff);
+    box-shadow: 0 0 6px rgba(255, 0, 140, 0.5);
+    animation: floatParticle linear infinite;
+  }
+  @keyframes floatParticle {
+    from { transform: translateY(100vh); opacity: 0.7; }
+    to { transform: translateY(-150px); opacity: 0; }
+  }
+  @media (max-width: 950px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; gap: 25px; }
+    .hero-content h1 { font-size: 3.2rem; }
+    .avatar-ring { width: 240px; height: 240px; margin: 0 auto; }
+    .nav-links { display: none; }
+    nav { justify-content: space-between; border-radius: 50px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .section-title { font-size: 2.4rem; }
+    .hero-content h2 { font-size: 1.2rem; letter-spacing: 3px; }
+  }
+  @media (max-width: 600px) {
+    .hero-buttons .btn { padding: 10px 22px; font-size: 0.9rem; }
+    section { padding: 70px 6%; }
+  }
+  .nav-active {
+    color: var(--pink) !important;
+    text-shadow: 0 0 5px rgba(255,0,140,0.5);
+  }
+  :root {
+    --bg: #05000e;
+    --bg2: #0b0118;
+    --purple: #8b5cf6;
+    --purple2: #a855f7;
+    --pink: #ff008c;
+    --cyan: #00e5ff;
+    --white: #ffffff;
+    --text: #d9d9e7;
+    --glass: rgba(255, 255, 255, .05);
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-glow"></div>
+<nav>
+  <div class="logo">SKY<span>REX</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Communities</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://discord.gg/caekVRyC" target="_blank" class="discord-btn"><i class="fab fa-discord"></i> Discord</a>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-avatar">
+      <div class="avatar-ring">
+        <img src="https://r2.fivemanage.com/HSm24MNN7WT5CSMTBfKPX/db68841f1ecacff6fc049adfe6a0bc84.webp" alt="Skyrex Avatar">
+      </div>
+    </div>
+    <div class="hero-content">
+      <h3>⚡ GAMER · STREAMER · CONTENT CREATOR</h3>
+      <h1>SKYREX</h1>
+      <h2>CODE • CREATE • DOMINATE</h2>
+      <p>Professional FiveM developer & <strong style="color:#ffa0d4;">Administrator at Matrix Customs</strong>. Specializing in custom Lua systems, web integrations, modern UI/UX, and premium server solutions. Building legacy-driven experiences for communities worldwide.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-right"></i> View Communities</a>
+        <a href="https://github.com/skyrex-gwad" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPDATED ABOUT ME SECTION - Beginner Developer + Gamer/Streamer/Creator -->
+<section id="about">
+  <h2 class="section-title">ABOUT ME</h2>
+  <p class="section-sub">Gamer. Streamer. Content Creator. Beginner Developer.</p>
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>WHO IS SKYREX? 🎮</h3>
+      <p>I'm a <strong style="color:#ffa0d4;">Gamer, Streamer, and Content Creator</strong> who recently stepped into the world of development. As a <strong style="color:#ffa0d4;">beginner developer</strong>, I'm passionate about learning FiveM scripting, Lua, Discord bots, and web technologies. Every day is a new challenge, and I love building things that bring communities together.</p>
+      <p>Currently serving as <strong class="highlight" style="color:#ffa0d4;">Administrator at Matrix Customs</strong>, where I oversee community operations and contribute to development. I stream my coding journey, gaming sessions, and content creation on YouTube — sharing my progress from beginner to pro.</p>
+      <p style="margin-top: 15px;"><i class="fas fa-gamepad" style="color: #ff008c; margin-right: 8px;"></i> <strong>Gamer</strong> · <i class="fas fa-video" style="color: #ff008c; margin-right: 8px; margin-left: 12px;"></i> <strong>Streamer</strong> · <i class="fas fa-film" style="color: #ff008c; margin-right: 8px; margin-left: 12px;"></i> <strong>Content Creator</strong> · <i class="fas fa-laptop-code" style="color: #ff008c; margin-right: 8px; margin-left: 12px;"></i> <strong>Beginner Dev</strong></p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><h4>1+</h4><span>Years Coding</span></div>
+      <div class="stat-card"><h4>5+</h4><span>Projects Deployed</span></div>
+      <div class="stat-card"><h4>1K+</h4><span>Community Users</span></div>
+      <div class="stat-card"><h4>🎮</h4><span>Always Gaming</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">SKILLS & EXPERTISE</h2>
+  <p class="section-sub">Cutting‑edge tools & technologies I'm learning and mastering.</p>
+  <div class="skills-grid">
+    <div class="skill-card reveal"><i class="fa-solid fa-code"></i><h3>Lua Development</h3><p>FiveM scripts, custom events, and framework integration — learning every day.</p></div>
+    <div class="skill-card reveal"><i class="fa-brands fa-discord"></i><h3>Discord Ecosystems</h3><p>Custom bots, verification, ticketing, and server management.</p></div>
+    <div class="skill-card reveal"><i class="fa-solid fa-gamepad"></i><h3>FiveM Frameworks</h3><p>QBCore, ESX, Overextended — beginner to intermediate level.</p></div>
+  </div>
+</section>
+
+<!-- COMMUNITIES SECTION -->
+<section id="projects">
+  <h2 class="section-title">MY COMMUNITIES</h2>
+  <p class="section-sub">Active communities where I contribute and build.</p>
+  <div class="projects-grid">
+    <!-- Hanami Haven -->
+    <div class="project-card reveal">
+      <div class="project-top"><span class="project-tag">🌸 HANAMI HAVEN</span></div>
+      <h3>Hanami Haven</h3>
+      <p>A peaceful global Discord community for chill vibes, music, gaming, anime, and friendship. Complete ecosystem with advanced Discord sync, dynamic web dashboard, and automated moderation.</p>
+      <div class="project-stack"><span>Community</span><span>Fun</span><span>Chilling</span></div>
+      <div style="display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
+        <a href="https://hanamihaven.online/" target="_blank" class="project-btn" style="background: linear-gradient(135deg, #ff008c, #8b5cf6);"><i class="fas fa-globe"></i> Website</a>
+        <a href="https://discord.gg/mnXNp5g" target="_blank" class="project-btn" style="background: linear-gradient(135deg, #5865F2, #4752c4);"><i class="fab fa-discord"></i> Discord</a>
+      </div>
+    </div>
+    <!-- Matrix Customs -->
+    <div class="project-card reveal">
+      <div class="project-top"><span class="project-tag">🚗 MATRIX CUSTOMS · ADMIN</span></div>
+      <h3>Matrix Customs</h3>
+      <p>FiveM server focused on custom vehicle tuning, dress works, and immersive mechanics. I develop vehicle systems, clothing scripts, and built the official website for the community. As Administrator, I oversee development and community operations.</p>
+      <div class="project-stack"><span>.jsx</span><span>.html</span><span>NUI</span><span>React</span><span>Vehicles</span><span>Clothing</span></div>
+      <a href="https://discord.gg/YMf8y4Btgk" target="_blank" class="project-btn"><i class="fab fa-discord"></i> Join Matrix Customs</a>
+    </div>
+    <!-- Stack Development -->
+    <div class="project-card reveal">
+      <div class="project-top"><span class="project-tag">🤖 STACK DEVELOPMENT</span></div>
+      <h3>Stack Development</h3>
+      <p>Discord bot development hub. Creating powerful, customizable bots for server management, moderation, entertainment, and community engagement. Built with cutting-edge Discord.js.</p>
+      <div class="project-stack"><span>Discord.js</span><span>NodeJS</span><span>MongoDB</span><span>Bots</span></div>
+      <a href="https://discord.com/invite/BHAGmQcE9y" target="_blank" class="project-btn"><i class="fab fa-discord"></i> Join Stack Dev</a>
+    </div>
+    <!-- SKYREX DISCORD -->
+    <div class="project-card reveal">
+      <div class="project-top"><span class="project-tag">🌌 SKYREX DISCORD</span></div>
+      <h3>SKYREX Discord</h3>
+      <p>Join the official SKYREX Discord community to stay updated on the latest projects, news, and announcements.</p>
+      <div class="project-stack"><span>Discord</span><span>Community</span></div>
+      <a href="https://discord.gg/caekVRyC" target="_blank" class="project-btn"><i class="fab fa-discord"></i> Join SKYREX Discord</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">LET'S CONNECT</h2>
+  <p class="section-sub">Ready to elevate your server? Let's build something legendary.</p>
+  <div class="contact-grid">
+    <a href="https://discord.gg/caekVRyC" target="_blank" class="contact-card reveal">
+      <i class="fa-brands fa-discord"></i><h3>SKYREX</h3><p>Join & connect directly</p>
+    </a>
+    <a href="https://discord.gg/mnXNp5g" target="_blank" class="contact-card reveal">
+      <i class="fa-brands fa-discord"></i><h3>HANAMI HAVEN</h3><p>Join & connect directly</p>
+    </a>
+    <a href="https://github.com/skyrex-gwad" target="_blank" class="contact-card reveal">
+      <i class="fa-brands fa-github"></i><h3>GitHub</h3><p>Open source & premium repos</p>
+    </a>
+    <a href="https://youtube.com/@skyrex_gamingg" target="_blank" class="contact-card reveal">
+      <i class="fa-brands fa-youtube"></i><h3>YouTube</h3><p>Tutorials & devlogs</p>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SKY<span>REX</span></div>
+  <p>© 2026 Matrix Customs & STACK Development — all rights reserved. Built with 💜 by SKYREX.</p>
+  <div class="footer-socials">
+    <a href="https://discord.gg/caekVRyC" target="_blank"><i class="fab fa-discord"></i></a>
+    <a href="https://github.com/skyrex-gwad" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://youtube.com/@skyrex_gamingg" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+</footer>
+
+<div id="particles"></div>
+<div id="scrollProgress"></div>
+
+<script>
+  // ========== ANTI-THEFT / PROTECTION ==========
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      return false;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+      e.preventDefault();
+      return false;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+      e.preventDefault();
+      return false;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  document.body.style.webkitUserSelect = "none";
+  document.body.style.userSelect = "none";
+  window.addEventListener('dragstart', e => e.preventDefault());
+
+  // ========== INTERACTIONS ==========
+  const cursorGlow = document.querySelector('.cursor-glow');
+  document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+  });
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const percent = (scrollTop / docHeight) * 100;
+    document.getElementById('scrollProgress').style.width = percent + '%';
+  });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  const sections = document.querySelectorAll('section');
+  const navItems = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let currentId = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 180;
+      if (pageYOffset >= sectionTop) {
+        currentId = section.getAttribute('id');
+      }
+    });
+    navItems.forEach(link => {
+      link.classList.remove('nav-active');
+      if (link.getAttribute('href') === '#' + currentId) {
+        link.classList.add('nav-active');
+      }
+    });
+  });
+
+  const particleContainer = document.getElementById('particles');
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size = Math.random() * 6 + 2;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = Math.random() * 15 + 8 + 's';
+    particle.style.animationDelay = Math.random() * 5 + 's';
+    particle.style.opacity = Math.random() * 0.6 + 0.2;
+    particle.style.background = `radial-gradient(circle, #ff66b5, #b84eff)`;
+    particleContainer.appendChild(particle);
+    setTimeout(() => { if(particle && particle.remove) particle.remove(); }, 20000);
+  }
+  for (let i = 0; i < 45; i++) createParticle();
+  setInterval(() => createParticle(), 1800);
+
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  console.log("%c🎮 SKYREX // GAMER · STREAMER · BEGINNER DEV 🎮", "background: #ff008c; color:white; font-size:16px; padding:8px 14px; border-radius: 30px; font-weight: bold;");
+  console.log("%cCode • Create • Dominate • Matrix Customs", "color: #a855f7; font-size: 14px;");
+</script>
+</body>
+</html>
